@@ -1,24 +1,20 @@
-import React, { useState } from 'react';
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
+import React, { useState, useEffect } from 'react';
+import { User, getUsers, deleteUser } from './api/users';
 
 function App(): JSX.Element {
-  const [users, setUsers] = useState<User[]>([
-    { id: 1, name: 'Cory', email: 'a@h.com' },
-    { id: 2, name: 'Megan', email: 'b@h.com' },
-    { id: 3, name: 'Tami', email: 'c@h.com' }
-  ]);
+  const [users, setUsers] = useState<User[]>([]);
+
+  useEffect(() => {
+    getUsers().then(_users => setUsers(_users));
+  }, []);
 
   const h1Style: React.CSSProperties = {
     color: 'red',
     marginBottom: 20
   };
 
-  function handleDelete(id: number): void {
+  async function handleDelete(id: number): Promise<void> {
+    await deleteUser(id);
     const newUsers = users.filter(user => user.id !== id);
     setUsers(newUsers);
   }
