@@ -26,7 +26,7 @@ function App(): JSX.Element {
       </h1>
       <ul>
         {users.map(user => (
-          <li>
+          <li key={user.id}>
             <button onClick={() => handleDelete(user.id)}>Delete</button>
             {user.name}
           </li>

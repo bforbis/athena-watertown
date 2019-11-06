@@ -17,4 +17,8 @@ export async function deleteUser(id: number): Promise<void> {
   const response = await fetch(`${USERS_URL}/${id}`, {
     method: 'delete'
   });
+  if (response.ok) {
+    return response.json();
+  }
+  throw new Error('Bad network response.');
 }
