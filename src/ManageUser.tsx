@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { User } from './api/users';
 import { addUser } from './api/users';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useRouteMatch } from 'react-router-dom';
 import Input from './Input';
 
-const ManageUser = (): JSX.Element => {
+const ManageUser: React.FC = () => {
+  const match = useRouteMatch<{ userId: string }>();
+  const userId = match ? match.params.userId : undefined;
+
   const [user, setUser] = useState<Omit<User, 'id'>>({ name: '', email: '' });
   const [saveCompleted, setSaveCompleted] = useState(false);
 
@@ -29,14 +32,13 @@ const ManageUser = (): JSX.Element => {
         <Input
           id="name"
           label="Name"
-          type="text"
           value={user.name}
           onChange={handleChange}
         />
         <Input
           id="email"
           label="Email"
-          type="text"
+          type="email"
           value={user.email}
           onChange={handleChange}
         />

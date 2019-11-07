@@ -10,8 +10,8 @@ function App(): JSX.Element {
     <>
       <Nav />
       <Route path="/" component={Home} exact />
-      <Route path="/users" component={Users} exact />
-      <Route path="/user" component={ManageUser} exact />
+      <Route path="/users" component={Users} />
+      <Route path="/user/:id?" component={ManageUser} />
     </>
   );
 }
