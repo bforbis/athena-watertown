@@ -3,7 +3,7 @@ import React from 'react';
 interface InputProps {
   label: string;
   id: string;
-  type: string;
+  type?: 'email' | 'text';
   onChange: React.ChangeEventHandler;
   value: string;
 }
@@ -15,7 +15,7 @@ const Input: React.FunctionComponent<InputProps> = props => {
       <br />
       <input
         id={props.id}
-        type={props.type}
+        type={props.type || 'text'}
         value={props.value}
         onChange={props.onChange}
       />
