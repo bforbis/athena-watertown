@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { User } from './api/users';
 import { addUser } from './api/users';
 import { Redirect } from 'react-router-dom';
+import Input from './Input';
 
 const ManageUser = (): JSX.Element => {
   const [user, setUser] = useState<Omit<User, 'id'>>({ name: '', email: '' });
@@ -25,28 +26,20 @@ const ManageUser = (): JSX.Element => {
       {saveCompleted && <Redirect to="/users" />}
       <h1>Add User</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <br />
-          <input
-            id="name"
-            type="text"
-            value={user.name}
-            onChange={handleChange}
-          />
-        </div>
-
-        <div>
-          <label htmlFor="email">Email</label>
-          <br />
-          <input
-            id="email"
-            type="email"
-            value={user.email}
-            onChange={handleChange}
-          />
-        </div>
-
+        <Input
+          id="name"
+          label="Name"
+          type="text"
+          value={user.name}
+          onChange={handleChange}
+        />
+        <Input
+          id="email"
+          label="Email"
+          type="text"
+          value={user.email}
+          onChange={handleChange}
+        />
         <input type="submit" value="Add User" />
       </form>
     </>
