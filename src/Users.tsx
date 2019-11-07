@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { User, getUsers, deleteUser } from './api/users';
+import { Link } from 'react-router-dom';
 
 function Users(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -24,6 +25,7 @@ function Users(): JSX.Element {
       <h1 className="header" style={h1Style}>
         Users
       </h1>
+      <Link to="/user">Add User</Link>
       <table className="table">
         <thead>
           <tr>
@@ -46,10 +48,6 @@ function Users(): JSX.Element {
           ))}
         </tbody>
       </table>
-      <ul></ul>
-      <label htmlFor="firstName">FirstName</label>
-      <input id="firstName" type="text"></input>
-      <p>My app</p>
     </>
   );
 }
