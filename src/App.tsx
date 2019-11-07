@@ -24,14 +24,29 @@ function App(): JSX.Element {
       <h1 className="header" style={h1Style}>
         Users
       </h1>
-      <ul>
-        {users.map(user => (
-          <li key={user.id}>
-            <button onClick={() => handleDelete(user.id)}>Delete</button>
-            {user.name}
-          </li>
-        ))}
-      </ul>
+      <table className="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <tr key={user.id}>
+              <td>
+                <button onClick={() => handleDelete(user.id)}>Delete</button>
+              </td>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <ul></ul>
       <label htmlFor="firstName">FirstName</label>
       <input id="firstName" type="text"></input>
       <p>My app</p>
