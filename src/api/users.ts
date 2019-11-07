@@ -1,4 +1,3 @@
-const USERS_URL = 'http://localhost:3001/users';
 export interface User {
   id: number;
   name: string;
@@ -6,7 +5,7 @@ export interface User {
 }
 
 export async function getUsers(): Promise<User[]> {
-  const response = await fetch(USERS_URL);
+  const response = await fetch('/users');
   if (response.ok) {
     return response.json();
   }
@@ -14,7 +13,7 @@ export async function getUsers(): Promise<User[]> {
 }
 
 export async function deleteUser(id: number): Promise<void> {
-  const response = await fetch(`${USERS_URL}/${id}`, {
+  const response = await fetch(`/users/${id}`, {
     method: 'delete'
   });
   if (response.ok) {
