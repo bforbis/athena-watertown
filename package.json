@@ -24,7 +24,9 @@
     "start:api": "json-server --port 3001 --watch db.json --routes routes.json",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy": "start-server-and-test start http://localhost:3000 cy:open",
+    "cy:open": "cypress open"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -45,9 +47,13 @@
     "singleQuote": true
   },
   "devDependencies": {
+    "@testing-library/cypress": "^5.0.2",
     "@testing-library/react": "^9.3.2",
+    "cypress": "^3.6.0",
     "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-cypress": "^2.7.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "start-server-and-test": "^1.10.6"
   }
 }

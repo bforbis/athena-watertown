@@ -31,7 +31,12 @@ const Users: React.FC<UsersProps> = ({ users, deleteUser }) => {
           {users.map(user => (
             <tr key={user.id}>
               <td>
-                <button onClick={() => deleteUser(user.id)}>Delete</button>
+                <button
+                  aria-label={`Delete user ${user.name}`}
+                  onClick={() => deleteUser(user.id)}
+                >
+                  Delete
+                </button>
                 <Link to={`/user/${user.id}`}>
                   <button>
                     Edit{' '}

@@ -5,7 +5,9 @@ extends:
   - 'plugin:prettier/recommended'
   - 'prettier/@typescript-eslint'
 parser: '@typescript-eslint/parser'
-plugins: ['@typescript-eslint']
+plugins: ['@typescript-eslint', 'cypress']
+env:
+  cypress/globals: true
 rules:
   prefer-template: error
   prefer-const: error
