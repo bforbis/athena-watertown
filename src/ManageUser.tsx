@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { User } from './api/users';
-import { addUser } from './api/users';
 import { Redirect, useRouteMatch } from 'react-router-dom';
 import Input from './Input';
 
-const ManageUser: React.FC = () => {
-  const match = useRouteMatch<{ userId: string }>();
+interface ManageUserProps {
+  addNewUser: (user: Omit<User, 'id'>) => Promise<void>;
+}
+const ManageUser: React.FC<ManageUserProps> = props => {
+  const match = useRouteMatch<{ userId: string }>(); // info about the matching URL
   const userId = match ? match.params.userId : undefined;
 
   const [user, setUser] = useState<Omit<User, 'id'>>({ name: '', email: '' });
@@ -14,8 +16,7 @@ const ManageUser: React.FC = () => {
   async function handleSubmit(event: React.FormEvent): Promise<void> {
     event.preventDefault(); // Stop browser from posting
     if (user.email && user.name) {
-      await addUser(user);
-      setUser({ name: '', email: '' });
+      await props.addNewUser(user);
       setSaveCompleted(true);
     }
   }

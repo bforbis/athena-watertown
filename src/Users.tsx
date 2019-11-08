@@ -1,24 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { User, getUsers, deleteUser } from './api/users';
+import React from 'react';
+import { User } from './api/users';
 import { Link } from 'react-router-dom';
 
-function Users(): JSX.Element {
-  const [users, setUsers] = useState<User[]>([]);
-
-  useEffect(() => {
-    getUsers().then(_users => setUsers(_users));
-  }, []);
-
+interface UsersProps {
+  users: User[];
+  deleteUser: (id: number) => Promise<void>;
+}
+const Users: React.FC<UsersProps> = ({ users, deleteUser }) => {
   const h1Style: React.CSSProperties = {
     color: 'red',
     marginBottom: 20
   };
-
-  async function handleDelete(id: number): Promise<void> {
-    await deleteUser(id);
-    const newUsers = users.filter(user => user.id !== id);
-    setUsers(newUsers);
-  }
 
   return (
     <>
@@ -39,7 +31,7 @@ function Users(): JSX.Element {
           {users.map(user => (
             <tr key={user.id}>
               <td>
-                <button onClick={() => handleDelete(user.id)}>Delete</button>
+                <button onClick={() => deleteUser(user.id)}>Delete</button>
                 <Link to={`/user/${user.id}`}>
                   <button>
                     Edit{' '}
@@ -58,6 +50,6 @@ function Users(): JSX.Element {
       </table>
     </>
   );
-}
+};
 
 export default Users;
