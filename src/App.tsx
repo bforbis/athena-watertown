@@ -4,7 +4,7 @@ import Nav from './Nav';
 import Users from './Users';
 import ManageUser from './ManageUser';
 import { Route } from 'react-router-dom';
-import { User, getUsers, deleteUser, addUser } from './api/users';
+import { User, getUsers, deleteUser, addUser, editUser } from './api/users';
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
@@ -19,9 +19,17 @@ function App(): JSX.Element {
     setUsers(newUsers);
   }
 
-  async function addNewUser(user: Omit<User, 'id'>): Promise<void> {
+  async function handleAddUser(user: Omit<User, 'id'>): Promise<void> {
     const newUser = await addUser(user);
     setUsers([...users, newUser]);
+  }
+
+  async function handleEditUser(changedUser: User): Promise<void> {
+    await editUser(changedUser);
+    const newUsers = users.map(user =>
+      user.id === changedUser.id ? changedUser : user
+    );
+    setUsers(newUsers);
   }
 
   return (
@@ -33,8 +41,14 @@ function App(): JSX.Element {
         render={props => <Users users={users} deleteUser={handleDelete} />}
       />
       <Route
-        path="/user/:id?"
-        render={props => <ManageUser addNewUser={addNewUser} />}
+        path="/user/:userId?"
+        render={props => (
+          <ManageUser
+            users={users}
+            onAddUser={handleAddUser}
+            onEditUser={handleEditUser}
+          />
+        )}
       />
     </>
   );
