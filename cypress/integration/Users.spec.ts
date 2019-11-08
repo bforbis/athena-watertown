@@ -1,5 +1,3 @@
-// No typescript types for cy object :(
-
 context('Users', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/users');

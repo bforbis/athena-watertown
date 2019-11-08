@@ -49,6 +49,7 @@
   "devDependencies": {
     "@testing-library/cypress": "^5.0.2",
     "@testing-library/react": "^9.3.2",
+    "@types/testing-library__cypress": "^5.0.1",
     "cypress": "^3.6.0",
     "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-cypress": "^2.7.0",
