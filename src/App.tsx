@@ -5,9 +5,14 @@ import Users from './Users';
 import ManageUser from './ManageUser';
 import { Route } from 'react-router-dom';
 import { User, getUsers, deleteUser, addUser, editUser } from './api/users';
+import {
+  InternationalizationContext,
+  Language
+} from './InternationalizationContext';
 
 function App(): JSX.Element {
   const [users, setUsers] = useState<User[]>([]);
+  const [language, setLanguage] = useState<Language>('English');
 
   useEffect(() => {
     getUsers().then(_users => setUsers(_users));
@@ -33,7 +38,7 @@ function App(): JSX.Element {
   }
 
   return (
-    <>
+    <InternationalizationContext.Provider value={{ language, setLanguage }}>
       <Nav />
       <Route path="/" component={Home} exact />
       <Route
@@ -50,7 +55,7 @@ function App(): JSX.Element {
           />
         )}
       />
-    </>
+    </InternationalizationContext.Provider>
   );
 }
 
